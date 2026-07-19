@@ -1,0 +1,17 @@
+{
+  "name": "DiTz Music",
+  "short_name": "DiTz Music",
+  "description": "Cari lagu dan dengarkan preview musik.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#09090b",
+  "theme_color": "#09090b",
+  "icons": [
+    {
+      "src": "/assets/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

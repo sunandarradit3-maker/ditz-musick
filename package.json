@@ -1,0 +1,13 @@
+{
+  "name": "ditz-music",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vercel dev",
+    "check": "node --check app.js && node --check api/search.js"
+  },
+  "devDependencies": {
+    "vercel": "latest"
+  }
+}

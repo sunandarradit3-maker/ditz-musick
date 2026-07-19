@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#09090b" />
+  <meta name="description" content="DiTz Music — cari lagu dan dengarkan preview musik secara gratis." />
+  <title>DiTz Music</title>
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="icon" href="/assets/icon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://is1-ssl.mzstatic.com" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Navigasi utama">
+      <a class="brand" href="#" aria-label="DiTz Music">
+        <span class="brand-mark">D</span>
+        <span>DiTz<span class="brand-accent">Music</span></span>
+      </a>
+
+      <nav class="nav-list">
+        <button class="nav-item active" data-view="home">
+          <span class="nav-icon">⌂</span><span>Beranda</span>
+        </button>
+        <button class="nav-item" data-view="favorites">
+          <span class="nav-icon">♡</span><span>Favorit</span>
+          <span class="nav-count" id="favoriteCount">0</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-card">
+        <span class="eyebrow">GRATIS</span>
+        <strong>Tanpa API key</strong>
+        <p>Katalog dan preview resmi 30 detik dari iTunes Search API.</p>
+      </div>
+
+      <p class="sidebar-footer">Made for music lovers.</p>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <button class="icon-button mobile-menu" id="mobileMenuButton" aria-label="Buka menu">☰</button>
+        <form class="search" id="searchForm" role="search">
+          <span class="search-icon">⌕</span>
+          <input id="searchInput" type="search" autocomplete="off" placeholder="Cari lagu, artis, atau album..." aria-label="Cari lagu" />
+          <kbd>Enter</kbd>
+        </form>
+        <button class="icon-button" id="themeButton" aria-label="Ganti tema">◐</button>
+      </header>
+
+      <section id="homeView" class="view active-view">
+        <section class="hero">
+          <div class="hero-content">
+            <span class="hero-badge">DI TZ MUSIC EXPERIENCE</span>
+            <h1>Temukan suara<br /><span>yang pas.</span></h1>
+            <p>Cari jutaan lagu, putar preview, simpan favorit, dan nikmati pengalaman musik yang cepat di semua perangkat.</p>
+            <div class="hero-actions">
+              <button class="primary-button" id="exploreButton">Mulai eksplor</button>
+              <button class="secondary-button" id="randomButton">Putar pilihan</button>
+            </div>
+          </div>
+          <div class="hero-art" aria-hidden="true">
+            <div class="vinyl vinyl-back"></div>
+            <div class="album-cover">
+              <div class="album-lines"></div>
+              <div class="album-label">DiTz<br /><span>Music</span></div>
+            </div>
+            <div class="sound-wave">
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+            </div>
+          </div>
+        </section>
+
+        <section class="section-block">
+          <div class="section-heading">
+            <div>
+              <span class="eyebrow">PILIH MOOD</span>
+              <h2>Eksplor musik</h2>
+            </div>
+          </div>
+          <div class="chips" id="genreChips">
+            <button class="chip active" data-query="Indonesia hits">Indonesia Hits</button>
+            <button class="chip" data-query="pop hits">Pop</button>
+            <button class="chip" data-query="hip hop hits">Hip-Hop</button>
+            <button class="chip" data-query="R&B hits">R&amp;B</button>
+            <button class="chip" data-query="indie music">Indie</button>
+            <button class="chip" data-query="lofi chill">Chill</button>
+          </div>
+        </section>
+
+        <section class="section-block results-section">
+          <div class="section-heading">
+            <div>
+              <span class="eyebrow" id="resultEyebrow">SEDANG TRENDING</span>
+              <h2 id="resultTitle">Pilihan buat kamu</h2>
+            </div>
+            <span class="result-count" id="resultCount"></span>
+          </div>
+
+          <div class="status-card hidden" id="statusCard" role="status"></div>
+          <div class="song-grid" id="songGrid" aria-live="polite"></div>
+        </section>
+      </section>
+
+      <section id="favoritesView" class="view">
+        <section class="page-heading">
+          <span class="eyebrow">KOLEKSI PRIBADI</span>
+          <h1>Lagu favorit</h1>
+          <p>Semua lagu yang kamu simpan tersimpan aman di perangkat ini.</p>
+        </section>
+        <div class="status-card hidden" id="favoriteStatus"></div>
+        <div class="song-grid" id="favoriteGrid"></div>
+      </section>
+    </main>
+  </div>
+
+  <footer class="player hidden" id="player">
+    <div class="now-playing">
+      <img id="playerArtwork" src="" alt="" />
+      <div class="now-playing-copy">
+        <strong id="playerTitle">Belum ada lagu</strong>
+        <span id="playerArtist">Pilih lagu untuk mulai</span>
+      </div>
+      <button class="favorite-button player-favorite" id="playerFavorite" aria-label="Simpan ke favorit">♡</button>
+    </div>
+
+    <div class="player-center">
+      <div class="player-controls">
+        <button class="control-button" id="previousButton" aria-label="Lagu sebelumnya">↞</button>
+        <button class="play-button" id="playButton" aria-label="Putar">▶</button>
+        <button class="control-button" id="nextButton" aria-label="Lagu berikutnya">↠</button>
+      </div>
+      <div class="timeline">
+        <span id="currentTime">0:00</span>
+        <input id="progressBar" type="range" min="0" max="100" value="0" aria-label="Posisi lagu" />
+        <span id="duration">0:30</span>
+      </div>
+    </div>
+
+    <div class="volume-control">
+      <span>⌁</span>
+      <input id="volumeBar" type="range" min="0" max="1" step="0.05" value="0.8" aria-label="Volume" />
+      <a id="storeLink" class="store-link" href="#" target="_blank" rel="noreferrer">Buka ↗</a>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="/app.js" defer></script>
+</body>
+</html>
